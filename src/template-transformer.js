@@ -21,6 +21,10 @@ function tagTransformer (node) {
       node.name = 'img'
       break
 
+    case 'mf-page':
+      node.name = 'div'
+      break
+
     default:
   }
 }
@@ -113,7 +117,7 @@ function handleBindAttribute (value, attribute, node) {
 
   if (eventName === 'tap') eventName = 'click'
 
-  node.attribs[`@${eventName}`] = value
+  node.attribs[`@${eventName}`] = `${value}($event)`
   delete node.attribs[attribute]
 }
 
@@ -191,6 +195,8 @@ function attributeTransformer (node) {
       handleCatchAttribute(value, attribute, node)
     } else if (attribute.match(/^wx:/)) {
       handleWXAttribute(value, attribute, node)
+    } else if (attribute === 'mfConfig') {
+      delete node.attribs[attribute]
     } else {
       handleElseAttribute(value, attribute, node)
     }

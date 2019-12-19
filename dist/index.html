@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./monokai-sublime.css">
   <title></title>
   <style>
     html, body {
@@ -13,58 +14,110 @@
       display: flex;
       flex-direction: column;
       margin: 0;
+      background: #1D1E22;
     }
     article {
       display: flex;
       flex-direction: row;
       flex: 1;
     }
-    textarea {
+    .code {
       width: 99.5%;
       height: 99.5%;
-      padding: 0;
+      padding: 40px 0;
+      border: 2px #1D1E22 solid;
+    }
+    .header-content {
+      margin-left: 10px;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+    }
+    .input-code {
+      width: 120px;
+      height: 50px;
+      background: #1D1E22;
+      color: #fff;
+      border-radius: 8px;
+      line-height: 50px;
+      font-size: 16px;
+      font-weight: 500;
+      margin-top: 8px;
+      margin-bottom: 12px;
+      border: none;
+    }
+    .code-run {
+      width: 100px;
+      height: 50px;
+      background: #47cf73;
+      color: #1D1E22;
+      border-radius: 8px;
+      line-height: 50px;
+      font-size: 16px;
+      font-weight: 500;
+      margin-top: 8px;
+      margin-bottom: 12px;
+      border: none;
+      margin-left: 14px;
     }
     .source-code {
-      width: 500px;
+      width: 50%;
       display: flex;
       flex-direction: column;
     }
-    .source-code section.styles {
-      height: 50px;
+    .area-desc {
+      position: absolute;
+      width: 98%;
+      top: 4px;
+      left: 6px;
+      padding: 4px;
+      font-weight: bold;
+      color: #aaaebc;
+      background: #1A1B1F;
+      font-size: 20px;
+      display: inline-block;
+      vertical-align: middle;
     }
-    .source-code section.template, .source-code section.scripts {
-      flex: 1;
-    }
+    .source-code section.template,
+    .source-code section.styles,
+    .source-code section.scripts,
     .dist-code {
+      position: relative;
       flex: 1;
     }
   </style>
 </head>
 <body>
-  <header>
-    <button id="demo">填入示例代码</button>
-    <button id="run">运行</button>
+  <header class="header-content">
+    <button id="demo" class="input-code">填入示例代码</button>
+    <button id="run" class="code-run">运行</button>
   </header>
   <article>
-    <section class="source-code">
-      <section class="template">
-        <textarea name="template" id="template"></textarea>
+      <section class="source-code">
+        <section class="template">
+          <div class="area-desc">wxml</div>
+          <div id="template" class="code html" contentEditable></div>
+        </section>
+        <section class="styles">
+          <div class="area-desc">wxss</div>
+          <div id="styles" class="code css" contentEditable></div>
+        </section>
+        <section class="scripts">
+          <div class="area-desc">javascript</div>
+          <div id="scripts" class="code javascript" contentEditable></div>
+        </section>
       </section>
-      <section class="styles">
-        <textarea name="styles" id="styles"></textarea>
+      <section class="dist-code">
+        <div class="area-desc">VUE</div>
+        <div id="dist" class="code xml" contentEditable></div>
       </section>
-      <section class="scripts">
-        <textarea name="scripts" id="scripts"></textarea>
-      </section>
-    </section>
-    <section class="dist-code">
-      <textarea name="dist" id="dist"></textarea>
-    </section>
   </article>
   <script src="./main.js"></script>
+  <script src="./highlight.pack.js"></script>
   <script>
+    hljs.initHighlightingOnLoad();
     function handleDemoClick () {
-      document.getElementById('template').value = `<mf-page mfConfig="{{mfConfig}}">
+      document.getElementById('template').innerText = `<mf-page mfConfig="{{mfConfig}}">
   <view class="container" style="padding-top:{{paddingHeight}}; padding-left: 10rpx; margin: 10rpx 20rpx 30rpx 40rpx; background: linear-gradient({{ color1 }}, {{ color2 }});">
     <view class="header" style="background: #fff">
       <marquee
@@ -95,7 +148,7 @@
   </view>
 </mf-page>
 `
-      document.getElementById('scripts').value = `// pages/active_page//fresh_coin_mall/exchange_detail/exchange_detail.js
+      document.getElementById('scripts').innerText = `// pages/active_page//fresh_coin_mall/exchange_detail/exchange_detail.js
 const appInteriorSkip = require('../../../../utils/services/app_interior_skip');
 const app = getApp();
 import { MFPage } from '../../../../application'
@@ -226,7 +279,7 @@ MFPage({
   }
 })
 `
-  document.getElementById('styles').value = `
+  document.getElementById('styles').innerText = `
   .aa{
     box-shadow: 10rpx 20rpx;
     width: 200rpx; 
@@ -241,14 +294,17 @@ MFPage({
     margin: 20rpx 8rpx 20rpx 30rpx; 
     border: 1rpx solid;
   }
-  `
+    `
+      document.querySelectorAll('div.code').forEach((block) => {
+        hljs.highlightBlock(block)
+      })
     }
     document.getElementById('demo').addEventListener('click', handleDemoClick)
     document.getElementById('run').addEventListener('click', async () => {
-      document.getElementById('dist').value = await window.YG(
-        document.getElementById('template').value,
-        document.getElementById('styles').value,
-        document.getElementById('scripts').value
+      document.getElementById('dist').innerText = await window.YG(
+        document.getElementById('template').innerText,
+        document.getElementById('styles').innerText,
+        document.getElementById('scripts').innerText
       )
     })
   </script>
