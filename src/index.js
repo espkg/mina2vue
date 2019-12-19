@@ -2,17 +2,20 @@ import parser from '@babel/parser'
 import generator from '@babel/generator'
 import WXMLParser from './wxml-parser.js'
 import templateTransformer from './template-transformer.js'
-import html from 'htmlparser-to-html'
 import minaScriptTransformer from './mina-script-transformer'
 import vueGenerator from './vue-generator'
 import styleTransformer from './style-transformer'
+import HTMLGenerator from './html-generator'
 
 const wxmlParser = new WXMLParser()
 
 async function handleWXML (templateStr) {
   const templateAST = await wxmlParser.parse(templateStr)
   const distAST = await templateTransformer(templateAST)
-  const distCode = html(distAST)
+  HTMLGenerator.configure({
+    disableAttribEscape: true
+  })
+  const distCode = HTMLGenerator(distAST)
 
   return distCode
 }
