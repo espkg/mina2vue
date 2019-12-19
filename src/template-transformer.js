@@ -65,11 +65,24 @@ function handleStyleAttribute (value, node) {
         if (finalStyleValue.length) finalStyleValue += (index > 0 && '+') || ''
         finalStyleValue += (index % 2 ? part : JSON.stringify(part.trim()))
       })
+      const transferFinalStyleValue = finalStyleValue.replace(/([\d]+)rpx/g, (m, $1) => {
+        const newPx = $1.replace(/(^:)|(:$)/g, '')
+        return `${newPx * 0.5}px`
+      })
+      dynamicStyle[property] = transferFinalStyleValue
 
-      dynamicStyle[property] = finalStyleValue
+      // dynamicStyle[property] = finalStyleValue
     } else {
       // 静态 style 直接保存
-      normalStyle.push(style.trim())
+      const css = style.trim()
+      const transferFinalStyleValue = css.replace(
+        /([\d]+)rpx/g,
+        (m, $1) => {
+          const newPx = $1.replace(/(^:)|(:$)/g, '')
+          return `${newPx * 0.5}px`
+        }
+      )
+      normalStyle.push(transferFinalStyleValue)
     }
   })
 
