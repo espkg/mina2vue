@@ -44,5 +44,3 @@ export default async function YG (template, style, scripts) {
     handleJS(scripts)
   )
 }
-
-window.YG = YG

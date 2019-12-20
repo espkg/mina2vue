@@ -1,4 +1,8 @@
 module.exports = {
+  output: {
+    library: 'YG',
+    libraryTarget: 'umd'
+  },
   module: {
     rules: [{
       test: /\.m?js$/,
