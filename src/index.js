@@ -3,6 +3,7 @@ import generator from '@babel/generator'
 import WXMLParser from './wxml-parser.js'
 import templateTransformer from './template-transformer.js'
 import minaScriptTransformer from './mina-script-transformer'
+import MFScriptTransformer from './mf-script-transformer'
 import vueGenerator from './vue-generator'
 import styleTransformer from './style-transformer'
 import HTMLGenerator from './html-generator'
@@ -28,7 +29,8 @@ function handleJS (scriptStr) {
   const scriptAST = parser.parse(scriptStr, {
     sourceType: 'module'
   })
-  const distAST = minaScriptTransformer(scriptAST)
+  let distAST = minaScriptTransformer(scriptAST)
+  distAST = MFScriptTransformer(distAST)
   const distCode = generator.default(distAST).code
 
   return distCode

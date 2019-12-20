@@ -64,8 +64,8 @@ export default function minaScriptTransformer (ast) {
                 vueProps.properties.push(t.objectMethod(
                   'method',
                   t.identifier('mounted'),
-                  prop.value.params,
-                  prop.value.body
+                  prop.value ? prop.value.params : prop.params,
+                  prop.value ? prop.value.body : prop.body
                 ))
                 break
               case 'onReady':
@@ -152,19 +152,13 @@ export default function minaScriptTransformer (ast) {
         path.remove()
       }
     },
-    MemberExpression (path) {
-      const { node } = path
+    ThisExpression (path) {
       // this.data.foo -> this.foo
-      if (t.isMemberExpression(node.object) &&
-        t.isThisExpression(node.object.object) &&
-        node.object.property.name === 'data'
+      const parentNode = path.parentPath.node
+      if (t.isMemberExpression(path.parentPath.node) &&
+        parentNode.property.name === 'data'
       ) {
-        path.replaceWith(
-          t.memberExpression(
-            t.thisExpression(),
-            t.identifier(node.property.name)
-          )
-        )
+        path.parentPath.replaceWith(t.ThisExpression())
       }
     }
   })
