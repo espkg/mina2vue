@@ -1,6 +1,6 @@
 {
   "name": "@espkg/mina2vue",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Convert native wxml, wxss eg. to .vue files",
   "main": "dist/main.js",
   "directories": {
