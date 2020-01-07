@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`convert setData to assignment 1`] = `
+"export default {
+  methods: {
+    init() {
+      this.foo = 'bar';
+    }
+
+  }
+};"
+`;
+
+exports[`convert this.data.x to this.x 1`] = `
+"export default {
+  methods: {
+    init() {
+      const {
+        foo
+      } = this;
+      const foo2 = this.foo2;
+    }
+
+  }
+};"
+`;
+
+exports[`execute setData callback function after convert 1`] = `
+"export default {
+  methods: {
+    init() {
+      this.foo = 'bar';
+      this.callback();
+    }
+
+  }
+};"
+`;

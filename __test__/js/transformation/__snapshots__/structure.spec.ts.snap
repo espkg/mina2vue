@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`convert lifecycle methods to vue name properly 1`] = `
+"export default {
+  mixins: ['watch'],
+
+  beforeMount() {},
+
+  destroyed() {},
+
+  mounted() {}
+
+};"
+`;
+
+exports[`convert page lifecycle methods to vue name properly 1`] = `
+"export default {
+  created() {},
+
+  mounted() {},
+
+  destroyed() {}
+
+};"
+`;
+
+exports[`convert property definition with Observer 1`] = `
+"export default {
+  props: {
+    foo5: {
+      type: Number,
+      default: 0
+    }
+  },
+  watch: {
+    foo5: (newVal, oldVal) => {// 属性值变化时执行
+    }
+  }
+};"
+`;
+
+exports[`convert property definition with Observer on reference types 1`] = `
+"export default {
+  props: {
+    foo6: {
+      type: Object,
+      default: () => ({
+        bar: 1
+      })
+    }
+  },
+  watch: {
+    foo6: {
+      handler(newVal, oldVal) {// 属性值变化时执行
+      },
+
+      deep: true
+    }
+  }
+};"
+`;
+
+exports[`convert property definition with default value 1`] = `
+"export default {
+  props: {
+    foo2: {
+      type: Number,
+      default: 0
+    }
+  }
+};"
+`;
+
+exports[`convert property definition with default value on reference types 1`] = `
+"export default {
+  props: {
+    foo3: {
+      type: Object,
+      default: () => ({
+        bar: 1
+      })
+    },
+    foo4: {
+      type: Array,
+      default: () => [1, 2, 3]
+    }
+  }
+};"
+`;
+
+exports[`convert simple property definition 1`] = `
+"export default {
+  props: {
+    foo1: Boolean
+  }
+};"
+`;
+
+exports[`put other page methods & properties in vue methods property 1`] = `
+"export default {
+  _data: {},
+  methods: {
+    initPage: () => {},
+
+    handleClick(e) {}
+
+  }
+};"
+`;
+
+exports[`should avoid add additional watch property 1`] = `
+"export default {
+  props: {
+    foo7: {
+      type: Number,
+      default: 0
+    }
+  },
+  watch: {
+    foo7: (newVal, oldVal) => {// 属性值变化时执行
+    }
+  }
+};"
+`;
+
+exports[`should convert component data to vue format 1`] = `
+"export default {
+  data: () => ({})
+};"
+`;
+
+exports[`should convert components' properties to vue props 1`] = `
+"export default {
+  props: {}
+};"
+`;
+
+exports[`should convert page data to vue format 1`] = `
+"export default {
+  data: () => ({})
+};"
+`;
+
+exports[`should insert a watch property after existing properties 1`] = `
+"export default {
+  props: {
+    foo8: {
+      type: Number,
+      default: 0
+    }
+  },
+  watch: {
+    foo: () => {},
+    foo8: (newVal, oldVal) => {// 属性值变化时执行
+    }
+  }
+};"
+`;
+
+exports[`should output component to vue structure 1`] = `"export default {};"`;
+
+exports[`should output vue structure 1`] = `"export default {};"`;
+
+exports[`should put other methods & properties in vue methods properly 1`] = `
+"export default {
+  _data: {},
+  methods: {
+    initPage: () => {},
+
+    handleClick(e) {}
+
+  }
+};"
+`;

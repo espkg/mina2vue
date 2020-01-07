@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should convert <text> to <span> 1`] = `"<span></span>"`;
+
+exports[`should convert <view> to <div> 1`] = `"<div></div>"`;

@@ -1,16 +1,17 @@
 {
   "name": "@espkg/mina2vue",
-  "version": "0.3.2",
+  "version": "0.4.4",
   "description": "Convert native wxml, wxss eg. to .vue files",
-  "main": "dist/main.js",
+  "main": "dist/yu_gong.js",
+  "typings": "dist/@types/index.d.ts",
   "directories": {
-    "src": "src",
-    "test": "test"
+    "src": "dist"
   },
   "scripts": {
-    "start": "webpack --mode development -d -w",
-    "build": "webpack",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "jest --coverage --watchAll",
+    "start": "tsc -w & NODE_ENV=development rollup -c rollup.config.ts -w",
+    "build": "tsc && tsc --module commonjs --outDir dist/lib && NODE_ENV=production rollup -c rollup.config.ts",
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -18,34 +19,41 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/espkg/mina2vue/issues"
   },
   "homepage": "https://github.com/espkg/mina2vue#readme",
   "dependencies": {
-    "@babel/generator": "^7.7.4",
-    "@babel/parser": "^7.7.4",
-    "@babel/traverse": "^7.7.4",
-    "@babel/types": "^7.7.4",
+    "@babel/generator": "^7.8.3",
+    "@babel/parser": "^7.8.3",
+    "@babel/traverse": "^7.8.3",
+    "@babel/types": "^7.8.3",
     "htmlparser2": "^4.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
+    "@types/jest": "^24.9.0",
+    "@typescript-eslint/eslint-plugin": "^2.17.0",
+    "@typescript-eslint/parser": "^2.17.0",
     "babel-eslint": "^10.0.3",
-    "babel-loader": "^8.0.6",
-    "eslint": "^6.7.2",
+    "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-jest": "^23.6.0",
+    "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "jest": "^24.9.0",
+    "rollup": "^1.29.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-terser": "^5.2.0",
+    "ts-jest": "^24.3.0",
+    "typescript": "^3.7.5"
   },
   "files": [
-    "src",
-    "dist"
+    "dist/lib",
+    "dist/@types",
+    "dist/yu_gong.js",
+    "dist/yu_gong.js.map"
   ]
 }
