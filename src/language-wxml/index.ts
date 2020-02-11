@@ -13,5 +13,8 @@ export default async function (sourceCode : string, options : any = { }) {
   })
   const distCode : string = generator(distAst)
 
-  return distCode
+  // Undo the hacky fix from parser
+  return distCode.replace(/<>/g, (m) => {
+    return `<`
+  })
 }
