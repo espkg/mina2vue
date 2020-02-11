@@ -21,7 +21,7 @@ export default function parse (sourceCode : string) {
     return `${$1}<>${$2}`
     })
 
-    parser.write(sourceCode)
+    parser.write(hackyFix)
     parser.end()
   })
 }
