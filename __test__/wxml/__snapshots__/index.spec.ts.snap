@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`should convert less than sign correctly 1`] = `"<div>{{a<1?2:0}}<span>{{chigua}}</span></div>"`;
+
 exports[`should print HTML 1`] = `"<html></html>"`;
