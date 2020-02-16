@@ -15,7 +15,13 @@ export default function parse (sourceCode : string) {
       lowerCaseTags: false,
       recognizeSelfClosing: true
     })
-    parser.write(sourceCode)
+
+    // When change < to <>, htmlparser2 reads as part of same text node.
+    const hackyFix = sourceCode.replace(/(>[^<]*)<(.*<)/g, (m, $1, $2) => {
+    return `${$1}<>${$2}`
+    })
+
+    parser.write(hackyFix)
     parser.end()
   })
 }
