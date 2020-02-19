@@ -9,11 +9,11 @@ There are four main functions needed to successfully convert one page to vue.
 - `vueGenerator` combines the three things above into a vue file's content.
 
 
-   fn         |   input    |   output
---------------|------------|-----------
-jsConverter   | sourceCode(string), options({ type: 'page' }) | distCode(string)
-wxmlConverter | sourceCode(string), options({}) | distCode(string)
-wxssConverter | sourceCode(string), options({}) | distCode(string)
-vueGenerator  | template(wxmlConverter distCode), style(wxssConverter distCode), scripts(jsConverter distCode)
+|   fn           |   input      |   output    |
+| -------------- | ------------ | ----------- |
+| jsConverter   | sourceCode(string), options({ type: 'page' }) | distCode(string)
+| wxmlConverter | sourceCode(string), options({}) | distCode(string)
+| wxssConverter | sourceCode(string), options({}) | distCode(string)
+| vueGenerator  | template(wxmlConverter distCode), style(wxssConverter distCode), scripts(jsConverter distCode)
 
 
