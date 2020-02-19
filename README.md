@@ -14,6 +14,6 @@ There are four main functions needed to successfully convert one page to vue.
 | jsConverter   | sourceCode(string), options({ type: 'page' }) | script distCode(string)
 | wxmlConverter | sourceCode(string), options({}) | template distCode(string)
 | wxssConverter | sourceCode(string), options({}) | style distCode(string)
-| vueGenerator  | template(wxmlConverter distCode), style(wxssConverter distCode), scripts(jsConverter distCode)
+| vueGenerator  | template(wxmlConverter distCode), style(wxssConverter distCode), scripts(jsConverter distCode) | vue distCode(string)
 
 
